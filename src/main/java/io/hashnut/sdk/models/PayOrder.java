@@ -49,6 +49,7 @@ public class PayOrder implements Serializable {
     private byte[] gasLimit;
     private byte[] gasPrice;
     private byte[] fee;
+    private boolean customCallBackUrl;
     private static final long serialVersionUID = 1L;
     public String getPayOrderId() {
         return payOrderId;
@@ -315,9 +316,19 @@ public class PayOrder implements Serializable {
             return BigInteger.ZERO;
         return new BigInteger(obtainAmount);
     }
+
     public void setObtainAmount(BigInteger obtainAmount){
         this.obtainAmount=obtainAmount.toByteArray();
     }
+
+    public boolean isCustomCallBackUrl() {
+        return customCallBackUrl;
+    }
+
+    public void setCustomCallBackUrl(boolean customCallBackUrl) {
+        this.customCallBackUrl = customCallBackUrl;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

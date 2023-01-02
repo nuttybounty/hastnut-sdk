@@ -14,13 +14,14 @@ import java.util.UUID;
 
 public class Web3OrderUtilTest {
 
+    public static final String CHAIN="ETH";
     public static final int SERVICE_TYPE=0;
     public static final String SERVICE_VERSION="PaymentSplitterV2_1";
     public static final int SERVICE_ID=0;
     public static String MCH_ADDRESS ="0xEA997d01742B777F083A4529832450155B3623a6".toLowerCase();
-    public static String ACCESS_KEY_ID="ACC_1056989465932726272";
-    public static String REQUEST_KEY="bxu9zz9x3wb0yUg9HHsEAzX8RNNb9VsH";
-    public static String RESPONSE_KEY="8PjPKWDKmPMmWLKE2sX8pS88VD46f16D";
+    public static String ACCESS_KEY_ID="ACC_1057302383735865344";
+    public static String REQUEST_KEY="MnDHAkknqSykfOCCHkud8CkcPS1LMuAA";
+    public static String RESPONSE_KEY="bKANTFRvx9iKxjxA3fSsEKwREF59dSTA";
     public static String RECEIPT_CONTRACT_ADDRESS="0x0e0AB4350306e079399E58a6A98FCeeCB6c9A942".toLowerCase();
 
     static {
@@ -89,10 +90,12 @@ public class Web3OrderUtilTest {
             order.setCoinCode("usdt");
             order.setAccessChannel(PayConstant.ACCESS_CHANNEL_CHAIN);
             // 10 usdt
-            order.setAmount(BigInteger.valueOf(10_000_000L));
+            order.setAmount(BigInteger.valueOf(1_000_000L));
             order.setReceiptAddress(RECEIPT_CONTRACT_ADDRESS);
+            order.setCustomCallBackUrl(true);
+            order.setExtra("https://goerli.etherscan.io/");
 
-            OrderOutputParam outputParam=OrderUtil.createPayOrder(order,REQUEST_KEY,SERVICE_TYPE,SERVICE_VERSION,SERVICE_ID);
+            OrderOutputParam outputParam=OrderUtil.createPayOrderWithCustomCallBackUrl(order,REQUEST_KEY,SERVICE_TYPE,SERVICE_VERSION,SERVICE_ID, order.getExtra());
             System.out.println("get outputParam " + outputParam.toString());
         }catch (IOException | OrderException e){
             System.out.println("create pay order on chain exception " + e.getMessage());
