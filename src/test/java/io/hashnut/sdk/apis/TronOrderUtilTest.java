@@ -14,12 +14,12 @@ import java.util.UUID;
 public class TronOrderUtilTest {
     public static final int SERVICE_TYPE=0;
     public static final String SERVICE_VERSION="PaymentSplitterV2_1";
-    public static final int SERVICE_ID=2;
+    public static final int SERVICE_ID=4;
     public static String MCH_ADDRESS ="TDFChZcLGd5yWT8dqvjdeCkbQRboyBxL27";
-    public static String ACCESS_KEY_ID="ACC_1056926725960630272";
-    public static String REQUEST_KEY="KIB17VDKhmVeYwNNnYQVIV8bLYAXaAgg";
-    public static String RESPONSE_KEY="6Po8ExW6CgVKSaAAbStxJxYfnMrGBrff";
-    public static String RECEIPT_CONTRACT_ADDRESS="TJxyba9jmJDpgY97gDs9syaY6AdjTtyJMJ";
+    public static String ACCESS_KEY_ID="ACC_1064863785526755328";
+    public static String REQUEST_KEY="m9ZmZPbttIWZTFIaVxzhT9Qgmzmkqbb7";
+    public static String RESPONSE_KEY="5zEE3Bf1pTkD9Bf1wX3pZ42f1br1BdxV";
+    public static String RECEIPT_CONTRACT_ADDRESS="TVdh2Vk5z3vMUKuTE17o9iD1v8X7iQM99D";
 
     static {
         PayConstant.initEnv(PayConstant.ENV_TEST);

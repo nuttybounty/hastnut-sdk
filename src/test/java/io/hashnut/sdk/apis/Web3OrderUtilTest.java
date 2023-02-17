@@ -90,7 +90,7 @@ public class Web3OrderUtilTest {
             order.setCoinCode("usdt");
             order.setAccessChannel(PayConstant.ACCESS_CHANNEL_CHAIN);
             // 10 usdt
-            order.setAmount(BigInteger.valueOf(1_000_000L));
+            order.setAmount(BigInteger.valueOf(100_000_000L));
             order.setReceiptAddress(RECEIPT_CONTRACT_ADDRESS);
             order.setCustomCallBackUrl(true);
             order.setExtra("https://goerli.etherscan.io/");

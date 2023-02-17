@@ -37,7 +37,7 @@ public class PayConstant {
     public static String URL_HOST="";
     public static final String URL_HOST_DEV ="https://dev-web3.hashnut.io/api/";
     public static final String URL_HOST_TEST ="https://testnet-web3.hashnut.io/api/";
-    public static final String URL_HOST_PRD ="https://web3.hashnut.io/api/";
+    public static final String URL_HOST_PRD ="https://hashnut.io/api/";
     private static String API_VERSION = "v1.0.0";
     private static String API_LOCALE = "en";
 
