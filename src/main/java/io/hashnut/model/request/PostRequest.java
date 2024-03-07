@@ -1,15 +1,14 @@
 package io.hashnut.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.lang.reflect.Field;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class PostRequest<T> implements Request<T> {
 
     @Override
+    @JsonIgnore
     public boolean needSign(){return false;}
 
     @Override
@@ -20,8 +19,8 @@ public abstract class PostRequest<T> implements Request<T> {
 
     @Override
     @JsonIgnore
-    public Map<String,Object> getPayload() throws Exception {
-        return formatFields(this);
+    public String getPayload(ObjectMapper objectMapper) throws Exception {
+        return objectMapper.writeValueAsString(this);
     }
 
     @Override
@@ -43,21 +42,6 @@ public abstract class PostRequest<T> implements Request<T> {
                 }
             }
         }
-
         return null;
-    }
-
-    private static Map<String,Object> formatFields(Object obj) throws Exception{
-        Map<String,Object> result=new HashMap<>();
-        Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            field.setAccessible(true);
-            String fieldName = field.getName();
-            Object value = field.get(obj);
-            if(value!=null)
-                result.put(fieldName,value);
-        }
-        return result;
     }
 }

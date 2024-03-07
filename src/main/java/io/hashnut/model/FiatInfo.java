@@ -8,11 +8,8 @@ public class FiatInfo {
     private Boolean enabled;
     private Date createTime;
     private Date updateTime;
-    private static final long serialVersionUID = 1L;
 
-    public FiatInfo() {
-
-    }
+    public FiatInfo() {}
 
     public String getCurrency() {
         return this.currency;

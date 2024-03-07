@@ -5,18 +5,13 @@ import io.hashnut.model.response.QueryCoinsResponse;
 
 import java.util.List;
 
-public class QueryCoinsRequest extends GetRequest<QueryCoinsResponse> {
+public class QueryCoinsRequest extends PostRequest<QueryCoinsResponse> {
 
     public QueryCoinsRequest(Builder builder){
-
     }
 
     @Override
     public String getUri() {
-//        String uri = BASE_URI + this.orderId;
-//
-//        Map<String, String> uriParams = new HashMap<>();
-//        this.addUriParam(uriParams, "fx_currency", fxCurrency);
         return "/mch/queryAllCoinInfo";
     }
 

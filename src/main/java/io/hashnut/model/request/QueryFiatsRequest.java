@@ -2,13 +2,14 @@ package io.hashnut.model.request;
 
 import io.hashnut.model.response.QueryFiatsResponse;
 
-public class QueryFiatsRequest extends GetRequest<QueryFiatsResponse>{
+public class QueryFiatsRequest extends PostRequest<QueryFiatsResponse>{
 
     public QueryFiatsRequest(Builder builder){}
 
     @Override
     public String getUri() {
-        return "/mch/querySupportLegalTenders";
+        //return "/mch/querySupportLegalTenders";
+        return "/mch/querySupportFiats";
     }
 
     @Override

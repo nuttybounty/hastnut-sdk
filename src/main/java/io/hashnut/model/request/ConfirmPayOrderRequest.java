@@ -4,17 +4,45 @@ import io.hashnut.model.response.SingleResponse;
 
 public class ConfirmPayOrderRequest extends PostRequest<SingleResponse>{
     private final String BASE_URL="/pay/confirmPayOrderPaid";
-    private final String platformId;
-    private final String mchOrderNo;
+    private final String payOrderId;
+    private final String merchantOrderId;
     private final String accessSign;
     private final String payTxId;
     private final String chainCode;
     private final String payUUID;
     private final int txChannel;
 
+    public String getPayOrderId() {
+        return payOrderId;
+    }
+
+    public String getMerchantOrderId() {
+        return merchantOrderId;
+    }
+
+    public String getAccessSign() {
+        return accessSign;
+    }
+
+    public String getPayTxId() {
+        return payTxId;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
+
+    public String getPayUUID() {
+        return payUUID;
+    }
+
+    public int getTxChannel() {
+        return txChannel;
+    }
+
     public ConfirmPayOrderRequest(Builder builder){
-        this.platformId=builder.platformId;
-        this.mchOrderNo=builder.mchOrderNo;
+        this.payOrderId =builder.payOrderId;
+        this.merchantOrderId =builder.merchantOrderId;
         this.accessSign =builder.accessSign;
         this.payTxId=builder.payTxId;
         this.chainCode=builder.chainCode;
@@ -33,8 +61,8 @@ public class ConfirmPayOrderRequest extends PostRequest<SingleResponse>{
     }
 
     public static class Builder{
-        private String platformId;
-        private String mchOrderNo;
+        private String payOrderId;
+        private String merchantOrderId;
         private String accessSign;
         private String payTxId;
         private String chainCode;
@@ -45,9 +73,9 @@ public class ConfirmPayOrderRequest extends PostRequest<SingleResponse>{
 
         }
 
-        public Builder(String platformId,String mchOrderNo,String accessSign,String payTxId,String chainCode,String payUUID,int txChannel){
-            this.platformId=platformId;
-            this.mchOrderNo=mchOrderNo;
+        public Builder(String payOrderId,String merchantOrderId,String accessSign,String payTxId,String chainCode,String payUUID,int txChannel){
+            this.payOrderId =payOrderId;
+            this.merchantOrderId =merchantOrderId;
             this.accessSign =accessSign;
             this.payTxId=payTxId;
             this.chainCode=chainCode;
@@ -55,13 +83,13 @@ public class ConfirmPayOrderRequest extends PostRequest<SingleResponse>{
             this.txChannel=txChannel;
         }
 
-        public Builder withPlatformId(String platformId){
-            this.platformId=platformId;
+        public Builder withPayOrderId(String payOrderId){
+            this.payOrderId =payOrderId;
             return this;
         }
 
-        public Builder withMchOrderNo(String mchOrderNo){
-            this.mchOrderNo=mchOrderNo;
+        public Builder withMerchantOrderId(String merchantOrderId){
+            this.merchantOrderId =merchantOrderId;
             return this;
         }
 

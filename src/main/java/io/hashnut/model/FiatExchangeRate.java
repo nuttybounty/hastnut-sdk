@@ -10,7 +10,6 @@ public class FiatExchangeRate implements Serializable {
     private Float rate;
     private Date createTime;
     private Date updateTime;
-    private static final long serialVersionUID = 1L;
 
     public FiatExchangeRate() {
     }
@@ -61,21 +60,6 @@ public class FiatExchangeRate implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(this.hashCode());
-        sb.append(", baseCoin=").append(this.baseCoin);
-        sb.append(", quoteCoin=").append(this.quoteCoin);
-        sb.append(", chainCode=").append(this.chainCode);
-        sb.append(", rate=").append(this.rate);
-        sb.append(", createTime=").append(this.createTime);
-        sb.append(", updateTime=").append(this.updateTime);
-        sb.append("]");
-        return sb.toString();
     }
 }
 

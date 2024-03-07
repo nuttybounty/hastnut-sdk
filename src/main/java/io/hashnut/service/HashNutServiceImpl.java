@@ -7,21 +7,21 @@ import io.hashnut.exception.HashNutException;
 import io.hashnut.model.request.*;
 import io.hashnut.model.response.*;
 
-import java.util.Map;
 
 public class HashNutServiceImpl implements HashNutService {
 
     private final HashNutClient hashnutClient;
-
+    private final ObjectMapper objectMapper;
     public HashNutServiceImpl(HashNutClient hashnutClient) {
         this.hashnutClient = hashnutClient;
+        this.objectMapper=new ObjectMapper();
     }
 
     public <T> T request(Request<T> request) throws HashNutException {
         try {
-            Map<String,Object> payload = request.getPayload();
+            String payload = request.getPayload(objectMapper);
             String uri = request.getUri();
-            HashNutClientResponse response = hashnutClient.request(request.getMethod(), request.needSign(), uri, payload);
+            HashNutClientResponse response = hashnutClient.request(uri,payload,request.needSign());
             if (response.isSuccessful()) {
                 return buildResponse(request.getResponseClass(), response.getBody());
             } else {
@@ -38,10 +38,10 @@ public class HashNutServiceImpl implements HashNutService {
         try {
             // To ensure this can be converted from JSON properly we need to strip out the data and meta nodes
             JsonNode root = mapper.readTree(response);
-            int resultCode=root.findValue("resultCode").asInt();
-            String resultMsg=root.findValue("resultMsg").asText();
-            if(resultCode!=0)
-                throw new HashNutException("server return error response: " + resultMsg);
+            int code=root.findValue("code").asInt();
+            String msg=root.findValue("msg").asText();
+            if(code!=0)
+                throw new HashNutException("server return error response: " + msg);
             return mapper.convertValue(root,responseClass);
         } catch (Exception e) {
             throw new HashNutException(e.getMessage());

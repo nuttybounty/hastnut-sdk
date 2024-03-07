@@ -6,7 +6,6 @@ import java.util.List;
 
 public class QueryFiatsResponse {
     private List<FiatInfo> data;
-
     public List<FiatInfo> getData(){
         return data;
     }

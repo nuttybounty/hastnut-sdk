@@ -3,58 +3,50 @@ package io.hashnut.model;
 import java.util.Date;
 
 public class ChainInfo {
-    private String chainCode;
+    private Integer id;
+    private String chain;
     private String chainDesc;
-    private Date createTime;
-    private Date updateTime;
     private Boolean enable;
     private String receiptAddress;
     private Long txConfirmCount;
     private Boolean walletConnectEnable;
     private String bridgeServerAddress;
-    private String baseChainSymbol;
     private Integer decimals;
-    private Byte env;
+    private String baseChainSymbol;
+    private Integer env;
     private Long EIP712ChainId;
-    private static final long serialVersionUID = 1L;
+    private Long chainId;
+    private String baseChainCoin;
+    private Boolean EIP1559Support;
+    private Date createTime;
+    private Date updateTime;
 
-    public ChainInfo() {
+    public Integer getId() {
+        return id;
     }
 
-    public String getChainCode() {
-        return this.chainCode;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setChainCode(String chainCode) {
-        this.chainCode = chainCode;
+    public String getChain() {
+        return chain;
+    }
+
+    public void setChain(String chain) {
+        this.chain = chain;
     }
 
     public String getChainDesc() {
-        return this.chainDesc;
+        return chainDesc;
     }
 
     public void setChainDesc(String chainDesc) {
         this.chainDesc = chainDesc;
     }
 
-    public Date getCreateTime() {
-        return this.createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return this.updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public Boolean getEnable() {
-        return this.enable;
+        return enable;
     }
 
     public void setEnable(Boolean enable) {
@@ -62,7 +54,7 @@ public class ChainInfo {
     }
 
     public String getReceiptAddress() {
-        return this.receiptAddress;
+        return receiptAddress;
     }
 
     public void setReceiptAddress(String receiptAddress) {
@@ -70,7 +62,7 @@ public class ChainInfo {
     }
 
     public Long getTxConfirmCount() {
-        return this.txConfirmCount;
+        return txConfirmCount;
     }
 
     public void setTxConfirmCount(Long txConfirmCount) {
@@ -78,7 +70,7 @@ public class ChainInfo {
     }
 
     public Boolean getWalletConnectEnable() {
-        return this.walletConnectEnable;
+        return walletConnectEnable;
     }
 
     public void setWalletConnectEnable(Boolean walletConnectEnable) {
@@ -86,65 +78,83 @@ public class ChainInfo {
     }
 
     public String getBridgeServerAddress() {
-        return this.bridgeServerAddress;
+        return bridgeServerAddress;
     }
 
     public void setBridgeServerAddress(String bridgeServerAddress) {
         this.bridgeServerAddress = bridgeServerAddress;
     }
 
-    public String getBaseChainSymbol() {
-        return this.baseChainSymbol;
-    }
-
-    public void setBaseChainSymbol(String baseChainSymbol) {
-        this.baseChainSymbol = baseChainSymbol;
-    }
-
     public Integer getDecimals() {
-        return this.decimals;
+        return decimals;
     }
 
     public void setDecimals(Integer decimals) {
         this.decimals = decimals;
     }
 
-    public Byte getEnv() {
-        return this.env;
+    public String getBaseChainSymbol() {
+        return baseChainSymbol;
     }
 
-    public void setEnv(Byte env) {
+    public void setBaseChainSymbol(String baseChainSymbol) {
+        this.baseChainSymbol = baseChainSymbol;
+    }
+
+    public Integer getEnv() {
+        return env;
+    }
+
+    public void setEnv(Integer env) {
         this.env = env;
     }
 
     public Long getEIP712ChainId() {
-        return this.EIP712ChainId;
+        return EIP712ChainId;
     }
 
     public void setEIP712ChainId(Long EIP712ChainId) {
         this.EIP712ChainId = EIP712ChainId;
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(this.hashCode());
-        sb.append(", chainCode=").append(this.chainCode);
-        sb.append(", chainDesc=").append(this.chainDesc);
-        sb.append(", createTime=").append(this.createTime);
-        sb.append(", updateTime=").append(this.updateTime);
-        sb.append(", enable=").append(this.enable);
-        sb.append(", receiptAddress=").append(this.receiptAddress);
-        sb.append(", txConfirmCount=").append(this.txConfirmCount);
-        sb.append(", walletConnectEnable=").append(this.walletConnectEnable);
-        sb.append(", bridgeServerAddress=").append(this.bridgeServerAddress);
-        sb.append(", baseChainSymbol=").append(this.baseChainSymbol);
-        sb.append(", decimals=").append(this.decimals);
-        sb.append(", env=").append(this.env);
-        sb.append(", EIP712ChainId=").append(this.EIP712ChainId);
-        sb.append("]");
-        return sb.toString();
+    public Long getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(Long chainId) {
+        this.chainId = chainId;
+    }
+
+    public String getBaseChainCoin() {
+        return baseChainCoin;
+    }
+
+    public void setBaseChainCoin(String baseChainCoin) {
+        this.baseChainCoin = baseChainCoin;
+    }
+
+    public Boolean getEIP1559Support() {
+        return EIP1559Support;
+    }
+
+    public void setEIP1559Support(Boolean EIP1559Support) {
+        this.EIP1559Support = EIP1559Support;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
 

@@ -5,11 +5,22 @@ import io.hashnut.model.response.QueryFiatRateResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-public class QueryFiatRateRequest extends GetRequest<QueryFiatRateResponse>{
-    private final String BASE_URL="/mch/queryFliatExchangeRate";
+public class QueryFiatRateRequest extends PostRequest<QueryFiatRateResponse>{
     private final String baseCoin;
     private final String quoteCoin;
     private final String chainCode;
+
+    public String getBaseCoin() {
+        return baseCoin;
+    }
+
+    public String getQuoteCoin() {
+        return quoteCoin;
+    }
+
+    public String getChainCode() {
+        return chainCode;
+    }
 
     public QueryFiatRateRequest(Builder builder) {
         super();
@@ -20,12 +31,7 @@ public class QueryFiatRateRequest extends GetRequest<QueryFiatRateResponse>{
 
     @Override
     public String getUri() {
-        Map<String,String> param=new HashMap<>();
-        param.put("baseCoin",baseCoin);
-        param.put("quoteCoin",quoteCoin);
-        param.put("chainCode",chainCode);
-
-        return appendUriParams(BASE_URL,param);
+        return "/mch/queryFiatExchangeRate";
     }
 
     @Override
@@ -39,7 +45,6 @@ public class QueryFiatRateRequest extends GetRequest<QueryFiatRateResponse>{
         private String chainCode;
 
         public Builder(){
-
         }
 
         public Builder(String baseCoin,String quoteCoin,String chainCode){

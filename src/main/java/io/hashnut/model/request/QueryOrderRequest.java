@@ -1,15 +1,28 @@
 package io.hashnut.model.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.hashnut.model.response.QueryOrderResponse;
 
 public class QueryOrderRequest extends PostRequest<QueryOrderResponse> {
-    private final String platformId;
-    private final String mchOrderNo;
+    private final String payOrderId;
+    private final String merchantOrderId;
     private final String accessSign;
 
+    public String getPayOrderId() {
+        return payOrderId;
+    }
+
+    public String getMerchantOrderId() {
+        return merchantOrderId;
+    }
+
+    public String getAccessSign() {
+        return accessSign;
+    }
+
     private QueryOrderRequest(Builder builder) {
-        this.platformId = builder.platformId;
-        this.mchOrderNo = builder.mchOrderNo;
+        this.payOrderId = builder.payOrderId;
+        this.merchantOrderId = builder.merchantOrderId;
         this.accessSign=builder.accessSign;
     }
 
@@ -25,29 +38,28 @@ public class QueryOrderRequest extends PostRequest<QueryOrderResponse> {
     public Class<QueryOrderResponse> getResponseClass() {
         return QueryOrderResponse.class;
     }
-
     public static class Builder {
-        private String platformId;
-        private String mchOrderNo;
+        private String payOrderId;
+        private String merchantOrderId;
         private String accessSign;
 
         public Builder(){
 
         }
 
-        public Builder(String platformId,String mchOrderNo,String accessSign) {
-            this.platformId = platformId;
-            this.mchOrderNo = mchOrderNo;
+        public Builder(String payOrderId,String merchantOrderId,String accessSign) {
+            this.payOrderId = payOrderId;
+            this.merchantOrderId = merchantOrderId;
             this.accessSign = accessSign;
         }
 
-        public Builder withPlatformId(String platformId) {
-            this.platformId = platformId;
+        public Builder withPayOrderId(String payOrderId) {
+            this.payOrderId = payOrderId;
             return this;
         }
 
-        public Builder withMchOrderNo(String mchOrderNo) {
-            this.mchOrderNo = mchOrderNo;
+        public Builder withMerchantOrderId(String merchantOrderId) {
+            this.merchantOrderId = merchantOrderId;
             return this;
         }
 

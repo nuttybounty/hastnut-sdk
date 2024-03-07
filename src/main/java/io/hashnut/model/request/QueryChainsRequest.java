@@ -2,10 +2,9 @@ package io.hashnut.model.request;
 
 import io.hashnut.model.response.QueryChainsResponse;
 
-public class QueryChainsRequest extends GetRequest<QueryChainsResponse> {
+public class QueryChainsRequest extends PostRequest<QueryChainsResponse> {
 
     public QueryChainsRequest(Builder builder){
-
     }
 
     @Override
@@ -20,9 +19,7 @@ public class QueryChainsRequest extends GetRequest<QueryChainsResponse> {
 
     public static class Builder{
         public Builder(){
-
         }
-
         public QueryChainsRequest build(){
             return new QueryChainsRequest(this);
         }

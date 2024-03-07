@@ -1,6 +1,5 @@
 package io.hashnut.model.request;
 
-import io.hashnut.model.response.CreateOrderResponse;
 import io.hashnut.model.response.SingleResponse;
 
 public class LockPayOrderRequest extends PostRequest<SingleResponse>{
@@ -44,12 +43,12 @@ public class LockPayOrderRequest extends PostRequest<SingleResponse>{
             this.accessSign=accessSign;
         }
 
-        public Builder withPlatformId(String platformId){
+        public Builder withPayOrderId(String platformId){
             this.platformId=platformId;
             return this;
         }
 
-        public Builder withMchOrderNo(String mchOrderNo){
+        public Builder withMerchantOrderId(String mchOrderNo){
             this.mchOrderNo=mchOrderNo;
             return this;
         }

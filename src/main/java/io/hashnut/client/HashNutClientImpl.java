@@ -1,9 +1,7 @@
 package io.hashnut.client;
 
 import io.hashnut.authentication.Authentication;
-import io.hashnut.exception.InvalidCredentialsException;
 import io.hashnut.exception.SystemErrorException;
-import okhttp3.*;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -11,21 +9,22 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.*;
 
 public class HashNutClientImpl implements HashNutClient {
     /**
      * The production environment
      */
-    private static final String PRODUCTION_URL = "https://hashnut.io/api/v1.0.0";
+    private static final String PRODUCTION_URL = "https://hashnut.io/api/v2.0.0";
 
     /**
      * The sandbox environment
      */
-    private static final String SANDBOX_URL = "https://dev-web3.hashnut.io/api/v1.0.0";
+    private static final String SANDBOX_URL = "https://testnet-web3.hashnut.io/api/v2.0.0";
 
     private final Authentication authentication;
     private final String baseUrl;
@@ -36,9 +35,7 @@ public class HashNutClientImpl implements HashNutClient {
     }
 
     @Override
-    public HashNutClientResponse request(String method,boolean needSign, String uri, Map<String,Object> payload) {
-        long nonce = System.currentTimeMillis();
-
+    public HashNutClientResponse request(String uri, String body,boolean needSign) {
         TrustManager[] trustManagers = buildTrustManagers();
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)
@@ -48,25 +45,18 @@ public class HashNutClientImpl implements HashNutClient {
                 .hostnameVerifier((hostName, session) -> true)
                 .retryOnConnectionFailure(true)
                 .build();
-
         try {
-            Request.Builder request=null;
-            if (method.equals("GET")) {
-                request=new Request.Builder().get().url(this.baseUrl+uri);
-            } else if (method.equals("POST")) {
-                String requestPayload = null;
-                if(needSign){
-                    requestPayload = this.authentication.generateSignedPayload(payload);
-                }else{
-                    requestPayload = this.authentication.generatePayload(payload);
-                }
-                RequestBody requestBody = RequestBody.create(requestPayload,MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"));
-                request=new Request.Builder().post(requestBody).url(this.baseUrl+uri);
-            } else{
-                throw new Exception("Method Must Be GET or POST");
+            // serialize to json
+            RequestBody requestBody = RequestBody.create(body,MediaType.parse("application/json; charset=utf-8"));
+            Request.Builder request = new Request.Builder().post(requestBody).url(this.baseUrl + uri);
+            if(needSign){
+                String uuid= UUID.randomUUID().toString();
+                long timestamp=System.currentTimeMillis();
+                String sign=this.authentication.generateHashNutSign(uuid,timestamp,body);
+                request.addHeader("hashnut-request-uuid",uuid);
+                request.addHeader("hashnut-request-timestamp",Long.toString(timestamp,10));
+                request.addHeader("hashnut-request-sign",sign);
             }
-            request.addHeader("version","v1.0.0");
-            request.addHeader("locale", Locale.ENGLISH.toString());
             Response response = httpClient.newCall(request.build()).execute();
             return new HashNutClientResponse(response.code(), Objects.requireNonNull(response.body()).string());
         } catch (Exception e) {
@@ -88,20 +78,20 @@ public class HashNutClientImpl implements HashNutClient {
 
     private static TrustManager[] buildTrustManagers() {
         return new TrustManager[]{
-                new X509TrustManager() {
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] chain, String authType) {
-                    }
-
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] chain, String authType) {
-                    }
-
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return new X509Certificate[]{};
-                    }
+            new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) {
                 }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[]{};
+                }
+            }
         };
     }
 }

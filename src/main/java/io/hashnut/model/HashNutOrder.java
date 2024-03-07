@@ -1,157 +1,341 @@
 package io.hashnut.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class HashNutOrder {
-    private String mchAddress;
+    private String payOrderId;
     private String chain;
+    private String merchantAddress;
+    private String merchantOrderId;
     private String chainCode;
     private String coinCode;
-    private int createChannel;
-    private int accessChannel;
-    private String mchOrderId;
-    private String platformId;
-    private String contractAddress;
-    private String receiptAddress;
-    private long amount;
-    private int state;
+    private Integer createChannel;
+    private String payTxId;
+    private Integer rate;
+    private BigDecimal amount;
+    private BigDecimal obtainAmount;
+    private BigDecimal platformFee;
+    private Long confirmCount;
+    private Integer state;
+    private String subject;
+    private String remarkInfo;
+    private String extra;
+    private String param1;
+    private String param2;
+    private String accessKeyId;
     private String accessSign;
-    private int confirmCount;
-    private int genNftState;
-    private int genNftConfirmCount;
-    private int mintNftState;
-    private int mintNftConfirmCount;
-    private boolean walletConnectEnable;
-    private String bridgeServerAddress;
-    private int eip712ChainId;
-    private int chainId;
-    private long createTime;
-    private long expireDuration;
+    private Long payTxHeight;
+    private String payAddress;
+    private String receiptAddress;
+    private String errorCode;
+    private String errorMsg;
+    private Long expireTime;
+    private Long confirmPayTime;
+    private Long paySuccessTime;
+    private Long finishTime;
+    private Integer notifyCount;
+    private Integer notifyState;
+    private String notifyResult;
+    private Integer queryTxCount;
+    private Long nextQueryTxTime;
+    private Date createTime;
+    private Date updateTime;
 
-    public String getMchAddress() {
-        return mchAddress;
+    public String getPayOrderId() {
+        return payOrderId;
+    }
+
+    public void setPayOrderId(String payOrderId) {
+        this.payOrderId = payOrderId;
     }
 
     public String getChain() {
         return chain;
     }
 
+    public void setChain(String chain) {
+        this.chain = chain;
+    }
+
+    public String getMerchantAddress() {
+        return merchantAddress;
+    }
+
+    public void setMerchantAddress(String merchantAddress) {
+        this.merchantAddress = merchantAddress;
+    }
+
+    public String getMerchantOrderId() {
+        return merchantOrderId;
+    }
+
+    public void setMerchantOrderId(String merchantOrderId) {
+        this.merchantOrderId = merchantOrderId;
+    }
+
     public String getChainCode() {
         return chainCode;
+    }
+
+    public void setChainCode(String chainCode) {
+        this.chainCode = chainCode;
     }
 
     public String getCoinCode() {
         return coinCode;
     }
 
-    public int getCreateChannel() {
+    public void setCoinCode(String coinCode) {
+        this.coinCode = coinCode;
+    }
+
+    public Integer getCreateChannel() {
         return createChannel;
     }
 
-    public int getAccessChannel() {
-        return accessChannel;
+    public void setCreateChannel(Integer createChannel) {
+        this.createChannel = createChannel;
     }
 
-    public String getMchOrderId() {
-        return mchOrderId;
+    public String getPayTxId() {
+        return payTxId;
     }
 
-    public String getPlatformId() {
-        return platformId;
+    public void setPayTxId(String payTxId) {
+        this.payTxId = payTxId;
     }
 
-    public String getContractAddress() {
-        return contractAddress;
+    public Integer getRate() {
+        return rate;
     }
 
-    public String getReceiptAddress() {
-        return receiptAddress;
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 
-    public long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public int getState() {
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getObtainAmount() {
+        return obtainAmount;
+    }
+
+    public void setObtainAmount(BigDecimal obtainAmount) {
+        this.obtainAmount = obtainAmount;
+    }
+
+    public BigDecimal getPlatformFee() {
+        return platformFee;
+    }
+
+    public void setPlatformFee(BigDecimal platformFee) {
+        this.platformFee = platformFee;
+    }
+
+    public Long getConfirmCount() {
+        return confirmCount;
+    }
+
+    public void setConfirmCount(Long confirmCount) {
+        this.confirmCount = confirmCount;
+    }
+
+    public Integer getState() {
         return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getRemarkInfo() {
+        return remarkInfo;
+    }
+
+    public void setRemarkInfo(String remarkInfo) {
+        this.remarkInfo = remarkInfo;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    public String getParam1() {
+        return param1;
+    }
+
+    public void setParam1(String param1) {
+        this.param1 = param1;
+    }
+
+    public String getParam2() {
+        return param2;
+    }
+
+    public void setParam2(String param2) {
+        this.param2 = param2;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
     }
 
     public String getAccessSign() {
         return accessSign;
     }
 
-    public int getConfirmCount() {
-        return confirmCount;
+    public void setAccessSign(String accessSign) {
+        this.accessSign = accessSign;
     }
 
-    public int getGenNftState() {
-        return genNftState;
+    public Long getPayTxHeight() {
+        return payTxHeight;
     }
 
-    public int getGenNftConfirmCount() {
-        return genNftConfirmCount;
+    public void setPayTxHeight(Long payTxHeight) {
+        this.payTxHeight = payTxHeight;
     }
 
-    public int getMintNftState() {
-        return mintNftState;
+    public String getPayAddress() {
+        return payAddress;
     }
 
-    public int getMintNftConfirmCount() {
-        return mintNftConfirmCount;
+    public void setPayAddress(String payAddress) {
+        this.payAddress = payAddress;
     }
 
-    public boolean isWalletConnectEnable() {
-        return walletConnectEnable;
+    public String getReceiptAddress() {
+        return receiptAddress;
     }
 
-    public String getBridgeServerAddress() {
-        return bridgeServerAddress;
+    public void setReceiptAddress(String receiptAddress) {
+        this.receiptAddress = receiptAddress;
     }
 
-    public int getEip712ChainId() {
-        return eip712ChainId;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public int getChainId() {
-        return chainId;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public long getCreateTime() {
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public Long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Long expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public Long getConfirmPayTime() {
+        return confirmPayTime;
+    }
+
+    public void setConfirmPayTime(Long confirmPayTime) {
+        this.confirmPayTime = confirmPayTime;
+    }
+
+    public Long getPaySuccessTime() {
+        return paySuccessTime;
+    }
+
+    public void setPaySuccessTime(Long paySuccessTime) {
+        this.paySuccessTime = paySuccessTime;
+    }
+
+    public Long getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(Long finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public Integer getNotifyCount() {
+        return notifyCount;
+    }
+
+    public void setNotifyCount(Integer notifyCount) {
+        this.notifyCount = notifyCount;
+    }
+
+    public Integer getNotifyState() {
+        return notifyState;
+    }
+
+    public void setNotifyState(Integer notifyState) {
+        this.notifyState = notifyState;
+    }
+
+    public String getNotifyResult() {
+        return notifyResult;
+    }
+
+    public void setNotifyResult(String notifyResult) {
+        this.notifyResult = notifyResult;
+    }
+
+    public Integer getQueryTxCount() {
+        return queryTxCount;
+    }
+
+    public void setQueryTxCount(Integer queryTxCount) {
+        this.queryTxCount = queryTxCount;
+    }
+
+    public Long getNextQueryTxTime() {
+        return nextQueryTxTime;
+    }
+
+    public void setNextQueryTxTime(Long nextQueryTxTime) {
+        this.nextQueryTxTime = nextQueryTxTime;
+    }
+
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public long getExpireDuration() {
-        return expireDuration;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    // Getters and setters for all the fields
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
-    @Override
-    public String toString() {
-        return "HashNutOrder{" +
-                "mchAddress='" + mchAddress + '\'' +
-                ", chain='" + chain + '\'' +
-                ", chainCode='" + chainCode + '\'' +
-                ", coinCode='" + coinCode + '\'' +
-                ", createChannel=" + createChannel +
-                ", accessChannel=" + accessChannel +
-                ", mchOrderId='" + mchOrderId + '\'' +
-                ", platformId='" + platformId + '\'' +
-                ", contractAddress='" + contractAddress + '\'' +
-                ", receiptAddress='" + receiptAddress + '\'' +
-                ", amount=" + amount +
-                ", state=" + state +
-                ", accessSign='" + accessSign + '\'' +
-                ", confirmCount=" + confirmCount +
-                ", genNftState=" + genNftState +
-                ", genNftConfirmCount=" + genNftConfirmCount +
-                ", mintNftState=" + mintNftState +
-                ", mintNftConfirmCount=" + mintNftConfirmCount +
-                ", walletConnectEnable=" + walletConnectEnable +
-                ", bridgeServerAddress='" + bridgeServerAddress + '\'' +
-                ", eip712ChainId=" + eip712ChainId +
-                ", chainId=" + chainId +
-                ", createTime=" + createTime +
-                ", expireDuration=" + expireDuration +
-                '}';
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
 
