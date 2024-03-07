@@ -12,7 +12,7 @@ public class QueryCoinsRequest extends PostRequest<QueryCoinsResponse> {
 
     @Override
     public String getUri() {
-        return "/mch/queryAllCoinInfo";
+        return "/config/queryAllCoinInfo";
     }
 
     @Override

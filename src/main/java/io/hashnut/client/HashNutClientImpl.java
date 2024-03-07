@@ -3,17 +3,12 @@ package io.hashnut.client;
 import io.hashnut.authentication.Authentication;
 import io.hashnut.exception.SystemErrorException;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class HashNutClientImpl implements HashNutClient {
     /**
@@ -36,62 +31,26 @@ public class HashNutClientImpl implements HashNutClient {
 
     @Override
     public HashNutClientResponse request(String uri, String body,boolean needSign) {
-        TrustManager[] trustManagers = buildTrustManagers();
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .sslSocketFactory(createSSLSocketFactory(trustManagers), (X509TrustManager) trustManagers[0])
-                .hostnameVerifier((hostName, session) -> true)
-                .retryOnConnectionFailure(true)
-                .build();
         try {
-            // serialize to json
-            RequestBody requestBody = RequestBody.create(body,MediaType.parse("application/json; charset=utf-8"));
-            Request.Builder request = new Request.Builder().post(requestBody).url(this.baseUrl + uri);
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpRequest.Builder builder = HttpRequest.newBuilder()
+                    .uri(URI.create(this.baseUrl + uri))
+                    .timeout(Duration.ofSeconds(10))
+                    .header("content-type", "application/json");
             if(needSign){
                 String uuid= UUID.randomUUID().toString();
                 long timestamp=System.currentTimeMillis();
                 String sign=this.authentication.generateHashNutSign(uuid,timestamp,body);
-                request.addHeader("hashnut-request-uuid",uuid);
-                request.addHeader("hashnut-request-timestamp",Long.toString(timestamp,10));
-                request.addHeader("hashnut-request-sign",sign);
+                builder.header("hashnut-request-uuid",uuid);
+                builder.header("hashnut-request-timestamp",Long.toString(timestamp,10));
+                builder.header("hashnut-request-sign",sign);
             }
-            Response response = httpClient.newCall(request.build()).execute();
-            return new HashNutClientResponse(response.code(), Objects.requireNonNull(response.body()).string());
+            builder.POST(HttpRequest.BodyPublishers.ofString(body));
+            HttpRequest request = builder.build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            return new HashNutClientResponse(response.statusCode(), response.body());
         } catch (Exception e) {
             throw new SystemErrorException("Error making API call to HashNut", e);
         }
-    }
-
-    private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
-        SSLSocketFactory ssfFactory = null;
-        try {
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
-            ssfFactory = sc.getSocketFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ssfFactory;
-    }
-
-    private static TrustManager[] buildTrustManagers() {
-        return new TrustManager[]{
-            new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) {
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[]{};
-                }
-            }
-        };
     }
 }

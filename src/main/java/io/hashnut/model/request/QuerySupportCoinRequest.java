@@ -19,7 +19,8 @@ public class QuerySupportCoinRequest extends PostRequest<QueryCoinsResponse>{
 
     @Override
     public String getUri() {
-       return "/mch/querySupportCoinsByChainCode";
+       //return "/mch/querySupportCoinsByChainCode";
+        return "/config/querySupportCoinsByChainCode";
     }
 
     @Override

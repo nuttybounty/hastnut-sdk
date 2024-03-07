@@ -8,8 +8,6 @@ public interface HashNutService {
     QueryCoinsResponse queryAllCoinInfo(QueryCoinsRequest request) throws HashNutException;
     QueryChainsResponse queryAllChainInfo(QueryChainsRequest request) throws HashNutException;
     QueryCoinsResponse querySupportCoin(QuerySupportCoinRequest request) throws HashNutException;
-    QueryFiatsResponse queryFiatsRequest(QueryFiatsRequest request) throws HashNutException;
-    QueryFiatRateResponse queryFiatRate(QueryFiatRateRequest request) throws HashNutException;
     QueryOrderResponse queryOrder(QueryOrderRequest request) throws HashNutException;
     CreateOrderResponse createOrder(CreateOrderRequest request) throws HashNutException;
     SingleResponse lockPayOrder(LockPayOrderRequest build) throws HashNutException;

@@ -1,9 +1,10 @@
 package io.hashnut.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class FiatInfo {
-    private String currency;
+    private String fiatCode;
     private String description;
     private Boolean enabled;
     private Date createTime;
@@ -11,16 +12,16 @@ public class FiatInfo {
 
     public FiatInfo() {}
 
-    public String getCurrency() {
-        return this.currency;
+    public String getFiatCode() {
+        return fiatCode;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setFiatCode(String fiatCode) {
+        this.fiatCode = fiatCode;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -28,7 +29,7 @@ public class FiatInfo {
     }
 
     public Boolean getEnabled() {
-        return this.enabled;
+        return enabled;
     }
 
     public void setEnabled(Boolean enabled) {
@@ -36,7 +37,7 @@ public class FiatInfo {
     }
 
     public Date getCreateTime() {
-        return this.createTime;
+        return createTime;
     }
 
     public void setCreateTime(Date createTime) {
@@ -44,24 +45,10 @@ public class FiatInfo {
     }
 
     public Date getUpdateTime() {
-        return this.updateTime;
+        return updateTime;
     }
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(this.hashCode());
-        sb.append(", currency=").append(this.currency);
-        sb.append(", description=").append(this.description);
-        sb.append(", enabled=").append(this.enabled);
-        sb.append(", createTime=").append(this.createTime);
-        sb.append(", updateTime=").append(this.updateTime);
-        sb.append("]");
-        return sb.toString();
     }
 }

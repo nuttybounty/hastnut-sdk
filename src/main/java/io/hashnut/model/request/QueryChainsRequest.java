@@ -9,7 +9,7 @@ public class QueryChainsRequest extends PostRequest<QueryChainsResponse> {
 
     @Override
     public String getUri() {
-        return "/mch/queryAllChainInfo";
+        return "/config/queryAllChainInfo";
     }
 
     @Override

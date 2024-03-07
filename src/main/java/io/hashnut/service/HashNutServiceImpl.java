@@ -1,11 +1,14 @@
 package io.hashnut.service;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 import io.hashnut.client.HashNutClient;
 import io.hashnut.client.HashNutClientResponse;
 import io.hashnut.exception.HashNutException;
 import io.hashnut.model.request.*;
 import io.hashnut.model.response.*;
+
+import java.io.IOException;
 
 
 public class HashNutServiceImpl implements HashNutService {
@@ -15,6 +18,14 @@ public class HashNutServiceImpl implements HashNutService {
     public HashNutServiceImpl(HashNutClient hashnutClient) {
         this.hashnutClient = hashnutClient;
         this.objectMapper=new ObjectMapper();
+        objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
+            @Override
+            public void serialize(Object paramT, JsonGenerator paramJsonGenerator,
+                                  SerializerProvider paramSerializerProvider) throws IOException {
+                paramJsonGenerator.writeString("");
+            }
+        });
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
     }
 
     public <T> T request(Request<T> request) throws HashNutException {
@@ -64,17 +75,7 @@ public class HashNutServiceImpl implements HashNutService {
     }
 
     @Override
-    public QueryFiatsResponse queryFiatsRequest(QueryFiatsRequest request) throws HashNutException {
-        return request(request);
-    }
-
-    @Override
     public QueryOrderResponse queryOrder(QueryOrderRequest request) throws HashNutException {
-        return request(request);
-    }
-
-    @Override
-    public QueryFiatRateResponse queryFiatRate(QueryFiatRateRequest request) throws HashNutException {
         return request(request);
     }
 
