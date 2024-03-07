@@ -22,7 +22,7 @@ public class ServiceTest {
     private final String accessKeyId="ACC_1156690317534035968";
     private final String requestKey="JgsnNZqgtZttxHwzbLe4ZxstQwqLXHH4";
     private final String responseKey="CetlG87d3CPPTCQ48PgGoPCoR3tCx4R4";
-    private final String receiptAddress="0xdb3cef8aeecc1b41827053279b5d19a82b77e94a".toLowerCase();
+    private final String receiptAddress="0x45202d23a62e4f0e881004473c6e29d0a4448be3".toLowerCase();
 
     @Before
     public void before(){
