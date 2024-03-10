@@ -3,16 +3,14 @@ package io.hashnut.authentication;
 import io.hashnut.util.PayDigestUtil;
 
 public class Authentication {
-    private final String requestKey;
-    private final String responseKey;
+    private final String secretKey;
 
-    public Authentication(String requestKey, String responseKey) {
-        this.requestKey = requestKey;
-        this.responseKey = responseKey;
+    public Authentication(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public String generateHashNutSign(String uuid,long timestamp,String body) throws Exception {
         String signMessage=String.format("%s%d%s",uuid,timestamp,body);
-        return PayDigestUtil.HMACSHA256Base64(requestKey,signMessage);
+        return PayDigestUtil.HMACSHA256Base64(secretKey,signMessage);
     }
 }

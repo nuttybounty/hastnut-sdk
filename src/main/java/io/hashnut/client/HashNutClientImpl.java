@@ -24,9 +24,9 @@ public class HashNutClientImpl implements HashNutClient {
     private final Authentication authentication;
     private final String baseUrl;
 
-    public HashNutClientImpl(String requestKey, String responseKey, boolean testMode) {
+    public HashNutClientImpl(String secretKey, boolean testMode) {
         this.baseUrl = testMode ? SANDBOX_URL : PRODUCTION_URL;
-        this.authentication = new Authentication(requestKey, responseKey);
+        this.authentication = new Authentication(secretKey);
     }
 
     @Override
