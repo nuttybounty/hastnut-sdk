@@ -1,5 +1,7 @@
 package io.hashnut.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.hashnut.client.HashNutClient;
 import io.hashnut.client.HashNutClientImpl;
 import io.hashnut.exception.HashNutException;
@@ -19,9 +21,9 @@ public class ServiceTest {
     private final String chainCode="polygon-erc20";
     private final String coinCode="usdt";
     private final String merchantAddress="0xe1fd94f8874d698567e03f671a8c62e4e2e4be90";
-    private final String accessKeyId="01HRKDJ93KCNDPEPX9G87E0T33";
-    private final String secretKey ="nPCY9Q477Cl3tVulk1kYCPPyY1y114yN";
-    private final String receiptAddress="0xc7ac968908ed4c99538c8bed5371b94cbbe6d0c7".toLowerCase();
+    private final String accessKeyId="01HRP45GKQX6X8HVVSNRAYNWDY";
+    private final String secretKey ="4ppKsAP3RPR8i5vKVqaXAMKW57GYvFiW";
+    private final String receiptAddress="0x202921baf49319c522f8885368ae96415b9ca414";
 
     @Before
     public void before(){
@@ -72,11 +74,15 @@ public class ServiceTest {
                 .withReceiptAddress(receiptAddress)
                 .build());
         HashNutOrder order=response.getData();
-        System.out.println("create order : " + order);
-        System.out.println("create order payOrderId: " + order.getPayOrderId());
-        System.out.println("create order merchantOrderId: " + order.getMerchantOrderId());
-        System.out.println("create order accessSign: " + order.getAccessSign());
-        System.out.println("create order receiptAddress: " + order.getReceiptAddress());
+
+        ObjectMapper objectMapper=new ObjectMapper();
+        ObjectNode objectNode=objectMapper.createObjectNode();
+        objectNode.put("payOrderId",order.getPayOrderId());
+        objectNode.put("merchantOrderId",order.getMerchantOrderId());
+        objectNode.put("accessSign",order.getAccessSign());
+        objectNode.put("receiptAddress",order.getReceiptAddress());
+
+        System.out.println(objectNode.toPrettyString());
     }
 
     @Test
