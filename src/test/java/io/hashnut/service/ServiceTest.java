@@ -21,13 +21,13 @@ public class ServiceTest {
     private final String chainCode="polygon-erc20";
     private final String coinCode="usdt";
     private final String merchantAddress="0xe1fd94f8874d698567e03f671a8c62e4e2e4be90";
-    private final String accessKeyId="01HRP45GKQX6X8HVVSNRAYNWDY";
-    private final String secretKey ="4ppKsAP3RPR8i5vKVqaXAMKW57GYvFiW";
-    private final String receiptAddress="0x202921baf49319c522f8885368ae96415b9ca414";
+    private final String accessKeyId="01J2ZYF2S7FJASDA4RF2VFF253";
+    private final String secretKey ="AMxw44o3oeF6J4A4HxxBns66liAo9DJM";
+    private final String receiptAddress="0x7a30e50ae5b1c0c098718bbb8196a009c8eb9583";
 
     @Before
     public void before(){
-        hashnutClient = new HashNutClientImpl(secretKey, true);
+        hashnutClient = new HashNutClientImpl(secretKey, false);
         hashNutService = new HashNutServiceImpl(hashnutClient);
     }
 
@@ -65,6 +65,7 @@ public class ServiceTest {
     public void createOrder() throws HashNutException {
         final String merchantOrderId = UUID.randomUUID().toString();
         BigDecimal amount=new BigDecimal("1.13");
+        System.out.println("start " + new Date());
         CreateOrderResponse response = hashNutService.createOrder(new CreateOrderRequest.Builder()
                 .withAccessKeyId(accessKeyId)
                 .withMerchantOrderId(merchantOrderId)
@@ -73,6 +74,7 @@ public class ServiceTest {
                 .withAmount(amount)
                 .withReceiptAddress(receiptAddress)
                 .build());
+        System.out.println("end " + new Date());
         HashNutOrder order=response.getData();
 
         ObjectMapper objectMapper=new ObjectMapper();
